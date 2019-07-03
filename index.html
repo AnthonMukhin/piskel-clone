@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Piskel-clone</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header__wrap">
+        <a class="header__logo" href="#">Piskel-clone</a>
+      </div>
+    </header>
+    <main class="app">
+      <div class="app__left-block">
+          <ul class="menu__tool-bar tool-bar">
+            <li class="tool-bar__item">
+              <button class="tool-bar__button tool-bar__button--pen" data-action="pen"></button>
+            </li>
+            <li class="tool-bar__item">
+              <button class="tool-bar__button tool-bar__button--mirror-pen" data-action="mirror-pen"></button>
+            </li>
+            <li class="tool-bar__item">
+              <button class="tool-bar__button tool-bar__button--fill" data-action="fill"></button>
+            </li>
+            <li class="tool-bar__item">
+              <button class="tool-bar__button tool-bar__button--paint-roller" data-action="fill-all"></button>
+            </li>
+            <li class="tool-bar__item">
+              <button class="tool-bar__button tool-bar__button--eraser" data-action="eraser"></button>
+            </li>
+            <li class="tool-bar__item">
+              <button class="tool-bar__button tool-bar__button--line" data-action="line"></button>
+            </li>
+            <li class="tool-bar__item">
+              <button class="tool-bar__button tool-bar__button--rectangle" data-action="rectangle"></button>
+            </li>
+            <li class="tool-bar__item">
+              <button class="tool-bar__button tool-bar__button--circle" data-action="circle"></button>
+            </li>
+            <li class="tool-bar__item">
+              <button class="tool-bar__button tool-bar__button--lighten" data-action="lighten"></button>
+            </li>
+            <li class="tool-bar__item">
+              <button class="tool-bar__button tool-bar__button--pipette" data-action="pipette"></button>
+            </li>
+          </ul>
+          <ul class="color-picker">
+            <li class="color-picker__item color-picker__item--main">
+              <input class="color-picker__input" type="color" data-type="main">
+            </li>
+            <li class="color-picker__item color-picker__item--additional">
+              <input class="color-picker__input" type="color" data-type="additional">
+            </li>
+          </ul>
+      </div>
+      <div class="frames app__frames">
+        <ul class="frames__list"></ul>
+        <button class="frames__button button">Add new frame</button>
+      </div>
+      <div id="canvas" class="canvas app__canvas">
+        <div class="canvas__background"></div>
+        <canvas id="layers-canvas" class="canvas__layers" width="640px" height="640px"></canvas>
+        <canvas id="main-canvas" class="canvas__main" width="640px" height="640px"></canvas>
+        <canvas id="drawing-canvas" class="canvas__drawing" width="640px" height="640px"></canvas>
+        <p class="canvas__info">
+          <span class="canvas__size"></span>
+          <span class="canvas__cursor-coords"></span>
+        </p>
+      </div>
+      <div class="right-block">
+        <div class="preview">
+          <div class="preview__container">
+            <div class="preview__background"></div>
+            <div class="preview__img"></div>
+            <button class="preview__button"></button>
+          </div>
+          <div class="preview__range">
+              <p class="preview__value">FPS<span>0</span></p> 
+              <input class="preview__input" type="range" min="0" max="24" value="0">
+          </div>
+          <div class="preview-fullscreen">
+            <div class="preview-fullscreen__screen">
+              <div class="preview-fullscreen__background"></div>
+              <div class="preview-fullscreen__image"></div>
+            </div>
+          </div>
+        </div>
+        <div class="layers">
+          <ul class="layers__menu">
+            <li class ="layers__menu-item">
+              <button class="layers__button layers__button--add" data-action="add"></button>
+            </li>
+            <li class ="layers__menu-item">
+              <button class="layers__button layers__button--up" data-action="up"></button>
+            </li>
+            <li class ="layers__menu-item">
+              <button class="layers__button layers__button--down" data-action="down"></button>
+            </li>
+            <li class ="layers__menu-item">
+              <button class="layers__button  layers__button--delete" data-action="delete"></button>
+            </li>
+          </ul>
+          <ul class="layers__list"></ul>
+        </div>
+        <div class="export-menu">
+          <p class="export-menu__title">Export as:</p>
+          <input class="export-menu__input" type="text" value="New Piskel"> <br>
+          <div class="export-menu__wrapper">
+            <!-- <p class="export-menu__title">save as</p> -->
+            <ul class="export-menu__button-list">
+              <li>
+                <button id="save-gif" class="export-menu__button">gif</button>
+              </li>
+              <li>
+                <button id="save-apng" class="export-menu__button">apng</button>
+              </li>
+              <li>
+                <button class="export-menu__button">piskel</button>
+              </li>
+              <li>
+                <button class="export-menu__button">outher</button>
+              </li>
+            </ul>
+          </div>
+          <ul class="save-menu">
+            <li class="save-menu__item">
+              <button class="save-menu__button" data-action="save">Save session</button>
+            </li>
+            <li class="save-menu__item">
+              <button class="save-menu__button" data-action="reset">Reset session</button>
+            </li>
+          </ul>
+        </div>
+        <ul class="resize" id="resize">
+          <li class="resize__item">
+            <button class="resize__button" data-size="32">
+              32 x 32
+            </button>
+          </li>
+          <li class="resize__item">
+            <button class="resize__button resize__button--active" data-size="64">
+              64 x 64
+            </button>
+          </li>
+          <li class="resize__item">
+            <button class="resize__button" data-size="128">
+              128 x 128
+            </button>
+          </li>
+        </ul>
+      </div>
+    </main>
+    <div class="landing-page">
+      <div class="landing-page__wrap">
+          <div class="landing-page__preview">
+            <div class="landing-page__info">
+                <h1 class="landing-page__title">
+                  Piskel is a free online editor for animated sprites & pixel art
+                </h1>
+                <button class="landing-page__button">Create Sprite</button>
+              </div>
+              <img class="landing-page__screen" src="./assets/Piskel-clone-screen.jpg" alt="piskel-clone">
+            </div>
+          <div class="landing-page__animation animation">
+            <div>
+              <p class="animation__title">Animation examples</p>
+              <ul class="animation__list">
+                <li class="animation__item">
+                  <img class="animation__image" src="./assets/animation1.gif" alt="animation">
+                </li>
+                <li class="animation__item">
+                  <img class="animation__image" src="./assets/animation2.gif" alt="animation">
+                </li>
+                <li class="animation__item">
+                  <img class="animation__image" src="./assets/animation3.gif" alt="animation">
+                </li>
+                <li class="animation__item">
+                  <img class="animation__image" src="./assets/animation4.gif" alt="animation">
+                </li>
+                <li class="animation__item">
+                  <img class="animation__image" src="./assets/animation5.gif" alt="animation">
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="landing-page__functionality">
+            <div>
+              <p class="functionality__title">Available functionality</p>
+              <ul class="functionality__list">
+                <li class="functionality__item functionality__item--tools">Support 10 tools</li>
+                <li class="functionality__item functionality__item--maximize">Support three canvas size</li>
+                <li class="functionality__item functionality__item--export">Export as GIF and APNG</li>
+                <li class="functionality__item functionality__item--layers">Layers support</li>
+                <li class="functionality__item functionality__item--save">Saving session</li>
+              </ul>
+            </div>
+          </div>
+          <p class="landing-page__copyright">© Copyright 2019 by Mukhin Anton</p>
+      </div>
+    </div>
+    <template id="frame-default">
+      <div class="frame">
+        <p class=frame__number>1</p>
+        <div class="frame-background "></div>
+        <div class="frame__image" data-action="change"></div>
+        <button class="frame__button frame__button--delete" data-action="delete">D</button>
+        <button class="frame__button frame__button--clone" data-action="clone">C</button>
+        <button class="frame__button frame__button--swap" data-action="swap">S</button>
+      </div>
+    </template>  
+    <script src="/dist/index.js"></script>
+  <script type="text/javascript" src="index.js"></script></body>
+</html>
